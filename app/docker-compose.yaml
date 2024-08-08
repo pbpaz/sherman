@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../backend/src:/usr/src/app/src
+      - /usr/src/app/target
+    environment:
+      - MAVEN_OPTS=-Xmx512m
+    restart: always
+    container_name: backend-sherman
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: frontend-sherman
